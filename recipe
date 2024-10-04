@@ -1,0 +1,44 @@
+recipes = {}
+
+def add_recipe():
+   
+    recipe_name = input("Enter the recipe name: ")
+    
+    
+    ingredients = input("Enter the ingredients (separated by commas): ")
+    
+    
+    ingredients_list = [ingredient.strip() for ingredient in ingredients.split(',')]
+    
+    
+    recipes[recipe_name] = ingredients_list
+    
+    print(f"Recipe '{recipe_name}' added successfully!")
+
+
+def display_recipes():
+    if recipes:
+        print("\nStored Recipes:")
+        for name, ingredients in recipes.items():
+            print(f"{name}: {', '.join(ingredients)}")
+    else:
+        print("No recipes stored yet.")
+
+# loop 1
+while True:
+    print("\nOptions:")
+    print("1. Add a recipe")
+    print("2. Display all recipes")
+    print("3. Exit")
+    
+    choice = input("Choose an option (1-3): ")
+    
+    if choice == '1':
+        add_recipe()
+    elif choice == '2':
+        display_recipes()
+    elif choice == '3':
+        print("Exiting the program.")
+        break
+    else:
+        print("Invalid option. Please try again.")

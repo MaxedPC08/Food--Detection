@@ -1,1 +1,62 @@
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QLineEdit, QTextEdit, QPushButton, QMessageBox
 
+class RecipeApp(QWidget):
+    def init(self):
+        super().init()
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('Recipe Input')
+        self.setGeometry(100, 100, 400, 400)
+
+        layout = QVBoxLayout()
+
+        # Recipe Name
+        self.recipe_name_label = QLabel('Recipe Name:')
+        self.recipe_name_input = QLineEdit()
+        layout.addWidget(self.recipe_name_label)
+        layout.addWidget(self.recipe_name_input)
+
+        # Ingredients
+        self.ingredients_label = QLabel('Ingredients (separate with commas):')
+        self.ingredients_input = QLineEdit()
+        layout.addWidget(self.ingredients_label)
+        layout.addWidget(self.ingredients_input)
+
+        # Instructions
+        self.instructions_label = QLabel('Instructions:')
+        self.instructions_input = QTextEdit()
+        layout.addWidget(self.instructions_label)
+        layout.addWidget(self.instructions_input)
+
+        # Submit Button
+        self.submit_button = QPushButton('Submit Recipe')
+        self.submit_button.clicked.connect(self.submit_recipe)
+        layout.addWidget(self.submit_button)
+
+        # Set the layout
+        self.setLayout(layout)
+
+    def submit_recipe(self):
+        recipe_name = self.recipe_name_input.text()
+        ingredients = self.ingredients_input.text()
+        instructions = self.instructions_input.toPlainText()
+
+        if recipe_name and ingredients and instructions:
+            recipe_details = f"Recipe Name: {recipe_name}\nIngredients: {ingredients}\nInstructions: {instructions}"
+            QMessageBox.information(self, 'Recipe Submitted', recipe_details)
+            self.clear_inputs()
+        else:
+            QMessageBox.warning(self, 'Input Error', 'Please fill in all fields.')
+
+    def clear_inputs(self):
+        self.recipe_name_input.clear()
+        self.ingredients_input.clear()
+        self.instructions_input.clear()
+
+if name == 'main':
+    app = QApplication(sys.argv)
+    ex = RecipeApp()
+    ex.show()
+    sys.exit(app.exec_())

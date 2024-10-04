@@ -1,0 +1,6 @@
+ingredients_input = input("Please enter the ingredients you want to use, separated by commas: ")
+
+ingredients_list = [ingredient.strip() for ingredient in ingredients_input.split(',')]
+
+print("You have entered the following ingredients:")
+print(ingredients_list)
